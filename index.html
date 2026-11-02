@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exercice - Fractions et nombres décimaux - Sid KHALIFA</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Merriweather:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1e3a8a;
+  --blue-light:#dbeafe;
+  --blue-mid:#3b82f6;
+  --orange:#f59e0b;
+  --paper:#fffef7;
+  --border:#e5d5b7;
+  --green:#16a34a;
+  --green-bg:#dcfce7;
+  --red:#dc2626;
+  --red-bg:#fee2e2;
+}
+*{
+box-sizing:border-box
+}
+body{
+  margin:0;
+  font-family:'Nunito',sans-serif;
+  background:#fdf6e3;
+  background-image: radial-gradient(#e7dcc0 1px, transparent 1px);
+  background-size:24px 24px;
+  color:#1f2937;
+}
+.header{
+  background:white;
+  border-bottom:4px solid var(--blue);
+  padding:18px 24px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.brand{display:flex;align-items:center;gap:16px}
+.brand img{height:72px; width:auto; object-fit:contain}
+.brand-text{line-height:1.1}
+.brand-text .fransid{font-family:'Merriweather',serif;font-weight:800;font-size:22px;color:#111827;letter-spacing:1px}
+.brand-text .sub{font-size:11px;letter-spacing:2px;color:#6b7280;font-weight:700}
+.badge{background:var(--blue);color:white;padding:8px 14px;border-radius:999px;font-size:13px;font-weight:700}
+.container{max-width:900px;margin:28px auto;padding:0 18px}
+.title-card{
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  color:white;
+  border-radius:18px;
+  padding:28px 28px 22px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 10px 24px rgba(30,58,138,0.25);
+}
+.title-card h1{margin:0 0 6px;font-family:'Merriweather',serif;font-size:28px}
+.title-card p{margin:0;opacity:0.9;font-size:15px}
+.title-card::after{
+  content:"";
+  position:absolute;
+  right:-30px;top:-30px;
+  width:140px;height:140px;
+  background:rgba(255,255,255,0.12);
+  border-radius:50%;
+}
+.card{
+  background:var(--paper);
+  border:2px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+  margin:18px 0;
+  box-shadow:0 4px 0 var(--border);
+}
+.card h2{margin:0 0 14px;font-size:18px;color:var(--blue);display:flex;align-items:center;gap:8px}
+.q-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.q-item{
+  display:flex;
+  gap:12px;
+  align-items:flex-start;
+  background:white;
+  border:1.5px solid #e5e7eb;
+  border-radius:12px;
+  padding:12px 14px;
+  transition:all .2s;
+}
+.q-item.correct{border-color:var(--green);background:var(--green-bg)}
+.q-item.wrong{border-color:var(--red);background:var(--red-bg)}
+.q-num{background:var(--blue-light);color:var(--blue);font-weight:800;min-width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:14px}
+.q-text{flex:1}
+.q-text label{display:block;font-weight:700;margin-bottom:6px}
+.input-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+input[type=text]{border:2px solid #d1d5db;border-radius:8px;padding:8px 10px;font-size:15px;font-family:inherit;min-width:160px;outline:none;transition:border .2s}
+input[type=text]:focus{border-color:var(--blue-mid)}
+.status{font-size:18px;min-width:24px}
+.hint{font-size:12px;color:#6b7280;margin-top:4px}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0;position:sticky;bottom:12px;background:rgba(253,246,227,0.9);backdrop-filter:blur(8px);padding:12px;border-radius:12px;border:1.5px solid var(--border);z-index:9}
+.btn{border:none;border-radius:10px;padding:12px 18px;font-weight:800;font-size:14px;cursor:pointer;transition:transform .1s, box-shadow .1s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--blue);color:white;box-shadow:0 4px 0 #162c6b}
+.btn-secondary{background:white;color:var(--blue);border:2px solid var(--blue);box-shadow:0 4px 0 var(--border)}
+.btn-green{background:var(--green);color:white;box-shadow:0 4px 0 #0f7a33}
+.btn-orange{background:var(--orange);color:white;box-shadow:0 4px 0 #b45309}
+.score{margin-left:auto;font-weight:800;color:var(--blue);background:white;border:2px solid var(--border);padding:8px 14px;border-radius:999px}
+.corrige{display:none;background:white;border:2px dashed var(--blue-mid);border-radius:16px;padding:20px;margin-top:20px}
+.corrige.open{display:block}
+.corrige h3{margin-top:0;color:var(--blue)}
+.corrige .ex{margin:10px 0;padding:10px 12px;background:var(--blue-light);border-radius:8px;font-size:14px}
+.footer{text-align:center;padding:30px 0 40px;color:#6b7280;font-size:13px}
+@media(max-width:600px){.q-item{flex-direction:column}.header{flex-direction:column;gap:10px}}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="brand">
+    <img src="data:image/jpeg;base64,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" alt="Logo FRANSID">
+    <div class="brand-text">
+      <div class="fransid">FRANSID</div>
+      <div class="sub">PROFESSEUR DE FRANÇAIS</div>
+      <div style="font-size:13px;margin-top:4px;color:#1e3a8a;font-weight:700">Exercice de Sid KHALIFA</div>
+    </div>
+  </div>
+  <div class="badge">📘 Maths • 6e-5e • Fractions</div>
+</div>
+
+<div class="container">
+  <div class="title-card">
+    <h1>Exercice : Fractions et nombres décimaux</h1>
+    <p>20 questions • Correction automatique • Vert = juste, Rouge = à revoir • Inspiré du manuel scolaire</p>
+  </div>
+
+  <div class="card">
+    <h2>🎯 Partie A - Conversions</h2>
+    <div class="q-grid" id="partA"></div>
+  </div>
+  <div class="card">
+    <h2>➕ Partie B - Additions et soustractions</h2>
+    <div class="q-grid" id="partB"></div>
+  </div>
+  <div class="card">
+    <h2>🔧 Partie C - Simplifications & Opérations</h2>
+    <div class="q-grid" id="partC"></div>
+  </div>
+  <div class="card">
+    <h2>🧠 Partie D - Logique & Problèmes</h2>
+    <div class="q-grid" id="partD"></div>
+  </div>
+
+  <div class="actions">
+    <button class="btn btn-primary" onclick="corriger()">✅ Corriger</button>
+    <button class="btn btn-green" onclick="toggleCorrige()">📖 Corrigé avec explication</button>
+    <button class="btn btn-orange" onclick="telecharger()">💾 Télécharger ce fichier</button>
+    <button class="btn btn-secondary" onclick="reinitialiser()">↺ Réinitialiser</button>
+    <span class="score" id="score">Score : - / 20</span>
+  </div>
+
+  <div class="corrige" id="corrigeBox"></div>
+
+  <div class="footer">Créé par Sid KHALIFA • FRANSID - Professeur de Français • Exercice interactif généré en HTML/CSS/JS</div>
+</div>
+
+<script>
+const questions=[
+{id:1,text:"Écris la fraction <b>3/4</b> sous forme de nombre décimal.",ans:["0.75","0,75"],hint:"Ta réponse",part:"partA"},
+{id:2,text:"Écris la fraction <b>7/10</b> sous forme de nombre décimal.",ans:["0.7","0,7"],hint:"Ta réponse",part:"partA"},
+{id:3,text:"Écris la fraction <b>1/5</b> sous forme de nombre décimal.",ans:["0.2","0,2"],hint:"Ta réponse",part:"partA"},
+{id:4,text:"Écris le nombre décimal <b>0,25</b> sous forme de fraction irréductible.",ans:["1/4","0.25","0,25"],hint:"Ta réponse",part:"partA"},
+{id:5,text:"Écris le nombre décimal <b>0,8</b> sous forme de fraction irréductible.",ans:["4/5","0.8","0,8"],hint:"Ta réponse",part:"partA"},
+{id:6,text:"Calcule <b>2/5 + 1/5</b>.",ans:["3/5","0.6","0,6"],hint:"Ta réponse",part:"partB"},
+{id:7,text:"Calcule <b>5/8 - 3/8</b>.",ans:["2/8","1/4","0.25","0,25"],hint:"Ta réponse",part:"partB"},
+{id:8,text:"Calcule <b>3/4 + 1/2</b>.",ans:["5/4","1.25","1,25","1 1/4"],hint:"Ta réponse",part:"partB"},
+{id:9,text:"Calcule <b>7/10 - 2/5</b>.",ans:["3/10","0.3","0,3"],hint:"Ta réponse",part:"partB"},
+{id:10,text:"Simplifie la fraction <b>12/18</b>.",ans:["2/3","0.666","6/9"],hint:"Ta réponse",part:"partC"},
+{id:11,text:"Simplifie la fraction <b>15/25</b>.",ans:["3/5","0.6","0,6"],hint:"Ta réponse",part:"partC"},
+{id:12,text:"Calcule <b>2/3 × 3/4</b>.",ans:["6/12","1/2","0.5","0,5"],hint:"Ta réponse",part:"partC"},
+{id:13,text:"Calcule <b>5/6 × 2/5</b>.",ans:["10/30","1/3","0.333","0,333"],hint:"Ta réponse",part:"partC"},
+{id:14,text:"Calcule <b>3/4 ÷ 1/2</b>.",ans:["3/2","1.5","1,5","6/4"],hint:"Ta réponse",part:"partC"},
+{id:15,text:"Calcule <b>2/5 ÷ 4/5</b>.",ans:["1/2","0.5","0,5","2/4"],hint:"Ta réponse",part:"partC"},
+{id:16,text:"Range dans l'ordre croissant : <b>1/2 ; 0,4 ; 3/5 ; 0,55</b>.",ans:["0.4,1/2,0.55,3/5","0,4;1/2;0,55;3/5","0.4 0.5 0.55 0.6","0,4 1/2 0,55 3/5"],hint:"Ta réponse",part:"partD"},
+{id:17,text:"Complète <b>3/5 = .../10 = 0,...</b>",ans:["6/10=0.6","6/10=0,6","6 0.6","6 0,6"],hint:"Ta réponse",part:"partD"},
+{id:18,text:"Calcule <b>5/6 + 1/3 - 1/2</b>.",ans:["2/3","4/6","0.666","0,666"],hint:"Ta réponse",part:"partD"},
+{id:19,text:"Un gâteau est partagé en 8 parts égales. Léa en mange 3 parts et Tom en mange 2 parts. Quelle fraction du gâteau reste-t-il ? Écris aussi ce résultat en nombre décimal.",ans:["3/8=0.375","3/8 0.375","3/8=0,375","reste 3/8"],hint:"Ta réponse",part:"partD"},
+{id:20,text:"Calcule <b>7/10 + 1/4 - 3/5</b>.",ans:["7/20","0.35","0,35"],hint:"Ta réponse",part:"partD"},
+];
+
+const explanations={
+1:"3 ÷ 4 = 0,75",
+2:"7 ÷ 10 = 0,7",
+3:"1 ÷ 5 = 0,2",
+4:"0,25 = 25/100 = 1/4 (on divise par 25)",
+5:"0,8 = 8/10 = 4/5 (on divise par 2)",
+6:"Même dénominateur : 2/5+1/5=3/5",
+7:"5/8-3/8=2/8=1/4",
+8:"3/4+1/2=3/4+2/4=5/4=1,25",
+9:"7/10-2/5=7/10-4/10=3/10=0,3",
+10:"12/18 = (6×2)/(6×3)=2/3",
+11:"15/25=(5×3)/(5×5)=3/5",
+12:"2/3×3/4=6/12=1/2",
+13:"5/6×2/5=10/30=1/3",
+14:"Diviser = multiplier par l'inverse : 3/4÷1/2=3/4×2/1=6/4=3/2",
+15:"2/5÷4/5=2/5×5/4=10/20=1/2",
+16:"Convertis : 1/2=0,5 ; 3/5=0,6 → ordre : 0,4 < 0,5 < 0,55 < 0,6",
+17:"3/5=6/10 car on multiplie par 2 → 0,6",
+18:"Dénominateur commun 6 : 5/6+2/6-3/6=4/6=2/3",
+19:"Mangé : 3+2=5/8 → reste 3/8 → 3÷8=0,375",
+20:"Dénominateur 20 : 14/20+5/20-12/20=7/20=0,35"
+};
+
+function normalize(s){
+  return s.toLowerCase().replace(/\s+/g,'').replace(/;/g,',').replace('÷','/').replace('×','*').trim();
+}
+
+function render(){
+  questions.forEach(q=>{
+    const div=document.createElement('div');
+    div.className='q-item';
+    div.id='q-'+q.id;
+    div.innerHTML=`
+      <div class="q-num">${q.id}</div>
+      <div class="q-text">
+        <label>${q.text}</label>
+        <div class="input-row">
+          <input type="text" id="input-${q.id}" placeholder="Ta réponse..." oninput="liveCheck(${
+q.id})">
+          <span class="status" id="status-${q.id}"></span>
+        </div>
+        <div class="hint">Écris ta réponse en fraction ou en nombre décimal</div>
+      </div>
+    `;
+    document.getElementById(q.part).appendChild(div);
+  });
+}
+
+function liveCheck(id){
+  const q=questions.find(x=>x.id===id);
+  const val=document.getElementById('input-'+id).value;
+  const box=document.getElementById('q-'+id);
+  const st=document.getElementById('status-'+id);
+  if(!val){box.classList.remove('correct','wrong');st.textContent='';return;}
+  const norm=normalize(val);
+  const ok=q.ans.some(a=>{
+    const an=normalize(a);
+    if(norm===an) return true;
+    // tolérance inclusion pour Q16,17,19
+    if(q.id>=16){
+      return norm.includes(an.replace(',','').replace('.','')) || an.includes(norm) || norm.includes('0.4')&&norm.includes('0.55');
+    }
+    return false;
+  });
+  // vérification simple contient
+  let isOk=ok;
+  if(!isOk){
+    // check numeric equivalence
+    const tryNum=parseFloat(val.replace(',','.').split('=')[0]);
+    if(!isNaN(tryNum)){
+      for(let a of q.ans){
+        let av=parseFloat(a.replace(',','.').split(',')[0].split('=')[0]);
+        if(!isNaN(av) && Math.abs(av-tryNum)<0.001) isOk=true;
+      }
+    }
+  }
+  // cas spéciaux
+  if([16,17,19].includes(q.id) && val.length>3){
+    if(q.id===16 && val.includes('0,4') && val.includes('0,55')) isOk=true;
+    if(q.id===17 && val.includes('6')) isOk=true;
+    if(q.id===19 && val.includes('3/8')) isOk=true;
+  }
+  if(isOk){
+    box.classList.add('correct');box.classList.remove('wrong');st.textContent='✅';
+  } else {
+    // ne pas mettre rouge immédiatement en frappe, seulement si >2 chars ?
+    if(val.length>1){
+      box.classList.add('wrong');box.classList.remove('correct');st.textContent='❌';
+    }
+  }
+}
+
+function corriger(){
+  let score=0;
+  questions.forEach(q=>{
+    const el=document.getElementById('input-'+q.id);
+    liveCheck(q.id);
+    const box=document.getElementById('q-'+q.id);
+    if(box.classList.contains('correct')) score++;
+  });
+  document.getElementById('score').textContent=`Score : ${score} / 20`;
+  document.getElementById('score').style.background= score>=10 ? '#dcfce7' : '#fee2e2';
+  if(score===20){ alert('Bravo ! 20/20 🌟 Excellent travail, exercice de Sid KHALIFA validé !'); }
+}
+
+function toggleCorrige(){
+  const box=document.getElementById('corrigeBox');
+  if(!box.classList.contains('open')){
+    let html='<h3>📖 Corrigé détaillé - Exercice de Sid KHALIFA</h3>';
+    questions.forEach(q=>{
+      html+=`<div class="ex"><b>Q${q.id} :</b> ${q.text}<br>✅ Réponse : <b>${q.ans[0]}</b><br>💡 ${explanations[q.id]}</div>`;
+    });
+    box.innerHTML=html;
+    box.classList.add('open');
+    box.scrollIntoView({behavior:'smooth'});
+  } else {
+    box.classList.remove('open');
+  }
+}
+
+function reinitialiser(){
+  questions.forEach(q=>{
+    document.getElementById('input-'+q.id).value='';
+    document.getElementById('q-'+q.id).classList.remove('correct','wrong');
+    document.getElementById('status-'+q.id).textContent='';
+  });
+  document.getElementById('score').textContent='Score : - / 20';
+  document.getElementById('corrigeBox').classList.remove('open');
+}
+
+function telecharger(){
+  const content=document.documentElement.outerHTML;
+  const blob=new Blob([content],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='exercice-fractions-Sid-KHALIFA-FRANSID.html';
+  a.click();
+}
+
+render();
+</script>
+</body>
+</html>
